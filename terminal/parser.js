@@ -1,6 +1,7 @@
  export function parseInput(input) {
     input = input.trim();
-
+    let baseCommand = input;
+    let redirect = null;
     // splits into basecomands and redirects if necesary, storing it in a redirect object
     if (input.includes(">>")) {
         [baseCommand, redirect] = input.split(">>");

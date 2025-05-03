@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Ghostnet parser test </title>
+    </head>
+    <body>
+        <script type = "module">
+            import {parseInput} from "./parser.js";
+            const testcommand = 'cat hello.txt | grep h | wc -l';
+            const result = parseInput(testcommand);
+            console.log("parsed result: ", result);
+        </script>
+    </body>
+</html>
