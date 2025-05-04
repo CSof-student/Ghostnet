@@ -6,9 +6,12 @@
     <body>
         <script type = "module">
             import {parseInput} from "./parser.js";
-            const testcommand = 'cat hello.txt | grep h | wc -l';
+            import {runCommand} from "./commandRouter.js"
+            import {shellContext} from "./shell.js"
+            const testcommand = 'ls';
             const result = parseInput(testcommand);
             console.log("parsed result: ", result);
+            console.log("working directory", runCommand({command: "pwd", args: []}, shellContext)[0]);
         </script>
     </body>
 </html>

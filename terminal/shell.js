@@ -1,4 +1,6 @@
-const shellContext = {
+import { fileSystem } from "./filesystem.js";
+
+export const shellContext = {
     cwd: "/",
     history: [],
     env: {USER: "guest"},
@@ -6,3 +8,5 @@ const shellContext = {
     outputBuffer: [],
     hooks:{}
 }
+
+export default shellContext;
