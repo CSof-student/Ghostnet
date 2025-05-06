@@ -4,7 +4,7 @@ import {shellContext} from "./shell.js"
 import {parseInput} from "./parser.js";
 
 let command;
-
+ 
 // document.getElementById("placeholder button").onclick = function(){
 //     console.log("button clicked");
 //     command = document.getElementById("my text").value;
@@ -17,6 +17,6 @@ const input= document.getElementById("command-input");
 
     input.addEventListener('keydown', (e)=>{
         if(e.key == 'Enter') {
-            console.log(runCommand(parseInput(input.value),shellContext))
+            console.log(runCommand(parseInput(input.value),shellContext)[0]);
         }
     } )
