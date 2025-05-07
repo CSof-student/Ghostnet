@@ -1,3 +1,4 @@
+// @ts-check
 //basically decides which command to run from parser input
 
 import { runPwd } from "./commands/Pwd.js";

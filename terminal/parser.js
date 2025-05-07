@@ -1,3 +1,5 @@
+ // @ts-check
+
  export function parseInput(input) {
     input = input.trim();
     let baseCommand = input;

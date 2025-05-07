@@ -1,5 +1,6 @@
+// @ts-check
 
 export function runPwd(args,shellContext) {
-    return [shellContext.cwd];
+    return [shellContext.currNode.name];
 
 }
