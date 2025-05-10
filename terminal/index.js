@@ -4,7 +4,8 @@
 import { runCommand } from "./commandRouter.js"
 import {shellContext} from "./shell.js"
 import {parseInput} from "./parser.js";
-import { normalizePathTests } from "./tests.js";
+import { lsTests, normalizePathTests } from "./tests.js";
+import { fileSystem2 } from "./filesystem.js";
 
 let command;
  
@@ -13,7 +14,6 @@ let command;
 //     command = document.getElementById("my text").value;
 //     console.log(runCommand(parseInput(command),shellContext));
 
-    
 
 // }
 const input= document.getElementById("command-input");
@@ -29,4 +29,7 @@ const input= document.getElementById("command-input");
         } )
 }
 normalizePathTests();
+// console.log(parseInput("ls"));
+// console.log(runCommand(parseInput("ls")),shellContext);
+lsTests();
 

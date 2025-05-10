@@ -13,9 +13,11 @@ import shellContext from "./shell.js";
 
 
 export function normalizePath(rawPath,cwd) {
+    // if the thing that is attempting to normalize doesn't exist
+
     const rawPathArr = rawPath.split("/");
     let normalizedPath = [];
-    let currNode = this.cwd;
+    let currNode = cwd||this.cwd;
     //deals with .. case
     
     for(let i = 0; i < rawPathArr.length; i++) {
