@@ -37,4 +37,28 @@ export function normalizePath(rawPath,cwd) {
 
 }
 
+//hopefully this version works
+export function listChildrenNames(children) {
+    if (!children || typeof children !== 'object') return [];
+
+    // Case: if children is an object (keyed by name)
+    if (!Array.isArray(children)) {
+        return Object.keys(children);
+    }
+
+    // Case: if children is accidentally an array
+    return children.map(c => c.name);
+}
+
+export function followPath(startNode, pathSegments) {
+    let currentNode = startNode;
+    for (const seg of pathSegments) {
+        if(!currentNode.children || !currentNode.children[seg]) {
+            console.error("path is invalid");
+        }
+        currentNode = currentNode.children[seg];
+    }
+    return currentNode;
+}
+
 

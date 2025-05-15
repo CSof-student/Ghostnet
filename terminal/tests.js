@@ -77,6 +77,7 @@ export function normalizePathTests() {
 
 // ls tests
 export function lsTests() {
+    let allPassed = true;
     const rootPrototype = Object.getPrototypeOf(new fileSystem2().root);
     const FSnode = rootPrototype.constructor;
   
@@ -129,26 +130,41 @@ export function lsTests() {
       { desc: "ls user/docs", cwd: root, args: 'home/user/docs', exp: ['readme.md', 'notes.txt'] },
       { desc: "ls from docs with .", cwd: docs, args: '.', exp: ['readme.md', 'notes.txt'] },
       { desc: "ls empty dir", cwd: emptyDir, args: '', exp: [] },
+
+      //error handling tests
+      { desc: "ls non-existent path", cwd: root, args: 'fake', exp: 'error' },
+      { desc: "ls file instead of dir", cwd: docs, args: 'readme.md', exp: 'error' },
+      { desc: "ls nested bad path", cwd: root, args: 'home/fake/docs', exp: 'error' },
+      { desc: "ls with invalid path segment", cwd: root, args: '/..', exp: [] },
     ];
   
-    let allPassed = true;
     tests.forEach(({ desc, cwd, args, exp }, i) => {
-      const result = run(args, cwd);
-      const pass = Array.isArray(result) && result.length === exp.length && result.every((v, idx) => v === exp[idx]);
-      if (!pass) {
-        console.error(
-          `LS Test ${i + 1} failed: ${desc}\n` +
-          `  got: [${result}]\n` +
-          `  expected: [${exp}]`
-        );
-        allPassed = false;
-      }
-    });
-  
-    if (allPassed) {
-      console.log('✅ All ls tests passed!');
-    } else {
-      console.log('⚠️ Some ls tests failed.');
-    }
+        let result;
+        try {
+          result = run(args, cwd);
+          if (exp === 'error') {
+            console.error(`❌ LS Test ${i + 1} failed: ${desc}\n  expected error but got: ${result}`);
+            allPassed = false;
+            return;
+          }
+        } catch (err) {
+          if (exp === 'error') {
+            console.log(`✅ LS Test ${i + 1} passed (error caught): ${desc}`);
+            return;
+          } else {
+            console.error(`❌ LS Test ${i + 1} failed: ${desc}\n  unexpected error: ${err.message}`);
+            allPassed = false;
+            return;
+          }
+        }
+      
+        const pass = Array.isArray(result) && result.length === exp.length && result.every((v, idx) => v === exp[idx]);
+        if (!pass) {
+          console.error(
+            `❌ LS Test ${i + 1} failed: ${desc}\n  got: [${result}]\n  expected: [${exp}]`
+          );
+          allPassed = false;
+        }
+      });
   }
   

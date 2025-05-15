@@ -1,15 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title> tester </title>
+        <style>
+            body{
+                background-color: #1e1e1e;
+                color: #d4d4d4;
+                font-family: monospace;
+                padding: 20px;
+            }
+
+            #terminal{
+                border: 1px solid #333;
+                padding: 10px;
+                background-color: #000;
+                min-height: 300px;
+                width: 80%;
+                max-width: 800px;
+                margin: auto;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+
+            #command-line{
+                display: flex;
+                margin-top: 5px;
+            }
+
+            #prompt{
+                color: #0f0;
+                margin-right: 5px;
+            }
+
+            #command-input{
+                background-color: transparent;
+                border: none;
+                color: #d4d4d4;
+                font: inherit;
+                width: 100%;
+                outline: none;
+            }
+        </style>
     </head>
     <body>
 
-        <h1>Ghostnet</h1>
+        
+
+        <h1 style="text-align: center;">Ghostnet</h1>
+        <div id="terminal">
+            <div id="output">
+                <span id="prompt">user@ghostnet:$</span>
+                <input id="command-input" autocomplete="off">
+            </div> 
+        </div>
+
         <script src="index.js" type="module"></script>
         
 
-        <input id="command-input"><br>
+       
         
 
 
